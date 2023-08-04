@@ -20,8 +20,7 @@ while true; do
 
         case $REPLY in
             1) 
-                # TODO: use function to create database
-                echo $REPLY
+                create_DB
                 ;;
             2) 
                 list_DB
