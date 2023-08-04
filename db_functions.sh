@@ -40,6 +40,16 @@ connect_DB() {
     fi
 }
 
+drop_DB() {
+    read -p "Enter Database name you want to drop: " db_drop
+    if [ -d $DB_DIR/$db_drop ]; then
+        rm -r $DB_DIR/$db_drop
+        echo Database dropped successfully \# $db_drop \#
+    else
+        echo the database does not exist 
+    fi
+}
+
 ## this is used to check for table names and database names
 ## this uses :punct: is to check, an advanced regex for all special chars
 ##

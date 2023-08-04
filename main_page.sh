@@ -30,8 +30,7 @@ while true; do
                 ;;
 
             4) 
-                # TODO: Drop DB
-                echo $REPLY
+                drop_DB
                 ;;
             5) 
                 echo "Thanks for using the system :)"
