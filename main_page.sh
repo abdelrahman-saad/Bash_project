@@ -26,8 +26,7 @@ while true; do
                 list_DB
                 ;;
             3) 
-                # TODO: Connect to DB
-                echo $REPLY
+                connect_DB
                 ;;
 
             4) 

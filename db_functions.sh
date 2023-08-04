@@ -30,6 +30,15 @@ create_DB() {
     fi
 }
 
+connect_DB() {
+    read -p "Enter Database name you want to connect: " db_connect
+    if [ -d $DB_DIR/$db_connect ]; then
+        cd "$DB_DIR/$db_connect"
+        echo connect to Database successfully \# $db_connect \#
+    else
+        echo the database does not exist 
+    fi
+}
 
 ## this is used to check for table names and database names
 ## this uses :punct: is to check, an advanced regex for all special chars
