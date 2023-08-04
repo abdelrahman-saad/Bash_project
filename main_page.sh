@@ -1,3 +1,11 @@
+# Importing database control file
+source ./db_functions.sh 
+
+
+# create dir for database if not existed
+mkdir -p $DB_DIR
+
+
 echo "Welcome to DB Engine project"
 
 while true; do
@@ -16,8 +24,7 @@ while true; do
                 echo $REPLY
                 ;;
             2) 
-                # TODO: List DB
-                echo $REPLY
+                list_DB
                 ;;
             3) 
                 # TODO: Connect to DB
