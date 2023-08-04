@@ -1,18 +1,14 @@
-# The Project Features:
-# The Application will be CLI Menu based app, that will provide to user this Menu items:
-# Main Menu:
-# - Create Database
-# - List Databases
-# - Connect To Databases
-# - Drop Database
-
 echo "Welcome to DB Engine project"
 
 while true; do
 
     echo "Main Menu:"
-    options=('Create Database' 'List Databases' 'Connect to Database' 'Drop Database' 'Exit')
-    select opt in "${options[@]}"; do
+
+    # a var that holds the list options incase we want to add items for later
+    menu=('Create Database' 'List Databases' 'Connect to Database' 'Drop Database' 'Exit')
+
+    # select option from menu options 
+    select item in "${menu[@]}"; do
 
         case $REPLY in
             1) 
@@ -37,10 +33,10 @@ while true; do
                 exit
                 ;;
             *) 
-                echo "Invalid choice. Please enter a number from 1 to ${#options[@]}."
+                echo "Invalid choice. Please enter a number from 1 to ${#menu[@]}."
                 ;;
         esac
+
         done
-        break
 
 done
