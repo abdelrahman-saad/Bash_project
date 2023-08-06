@@ -27,6 +27,8 @@ while true; do
                 ;;
             3) 
                 connect_DB
+                cd ../../
+                break
                 ;;
 
             4) 

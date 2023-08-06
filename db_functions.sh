@@ -34,7 +34,9 @@ connect_DB() {
     read -p "Enter Database name you want to connect: " db_connect
     if [ -d $DB_DIR/$db_connect ]; then
         cd "$DB_DIR/$db_connect"
+        clear
         echo connect to Database successfully \# $db_connect \#
+        bash ../../tables_logic.sh
     else
         echo the database does not exist 
     fi
