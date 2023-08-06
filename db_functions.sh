@@ -36,7 +36,7 @@ connect_DB() {
         cd "$DB_DIR/$db_connect"
         clear
         echo connect to Database successfully \# $db_connect \#
-        bash ../../tables_logic.sh
+        bash ../../tables_page.sh
     else
         echo the database does not exist 
     fi

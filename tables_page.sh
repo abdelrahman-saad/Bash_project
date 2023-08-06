@@ -1,3 +1,5 @@
+# Importing tables control file
+source ../../tables_function.sh
 
 pwd
 table_menu=('Create Table' 'List Table' 'Drop Table' 'Insert into Table' 'Select from Table' 'Delete from Table' 'Update Table' 'Exit')
@@ -11,7 +13,7 @@ while true; do
                 echo $item
             ;;
             2)
-                echo $item
+                list_tables
             ;;
             3)
                 echo $item
