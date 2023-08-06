@@ -5,9 +5,9 @@
 
 list_tables() {
     lines=`ls | grep *.txt |wc -l`
-    if (( lines ==0 )); then
+    if (( lines == 0 )); then
         echo no tables found
     else
-        ls
+        ls | grep *.txt
     fi 
 }
