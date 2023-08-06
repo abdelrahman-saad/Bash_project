@@ -16,7 +16,7 @@ while true; do
                 list_tables
             ;;
             3)
-                echo $item
+                drop_table
             ;;
             4)
                 echo $item
