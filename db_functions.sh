@@ -18,15 +18,19 @@ list_DB() {
 create_DB() {
     echo # to create an empty line for better user interface
     read -p "Enter Database name : " db_name
-    if validate_heading $db_name; then
-        if [ -d $db_name ]; then
-            echo database already exists
+    if [[ -n $db_name ]]; then
+        if validate_heading $db_name; then
+            if [ -d $db_name ]; then
+                echo database already exists
+            else
+                mkdir $DB_DIR/$db_name
+                echo database created successfully
+            fi
         else
-            mkdir $DB_DIR/$db_name
-            echo database created successfully
+            echo could not create database it is wrongly named
         fi
     else
-        echo could not create database it is wrongly named
+        echo please enter a non-empty database name
     fi
 }
 
