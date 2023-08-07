@@ -9,7 +9,7 @@ column_menu=('Add Column' 'View Columns' 'Delete Column' 'Mark PK' 'Done' 'Exit'
 
 pk_selected=1
 touch "$1" "$1.txt"
-chmod a+w "$1.txt"
+# chmod a+w "$1.txt"
 
 while true; do
 
@@ -21,7 +21,8 @@ while true; do
                 create_table "$1" # this is found in create_table_functions.sh //// we use $1 for file that will contain meta data 
                 ;;
             2)
-            ;;
+                list_columns "$1"
+                ;;
             3)
             ;;
             4)

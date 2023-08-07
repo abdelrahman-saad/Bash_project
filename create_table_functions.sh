@@ -29,3 +29,12 @@ create_table() {
         echo values are empty
     fi
 }
+
+list_columns() {
+    lines=`cat $1 | wc -l `
+    if (( lines == 0 )); then
+        echo no columns found
+    else
+        echo `cat $1`
+    fi
+}
