@@ -10,7 +10,7 @@ while true; do
 
         case $REPLY in
             1)
-                echo $item
+                create_table # this is found in tables_functions.sh
             ;;
             2)
                 list_tables

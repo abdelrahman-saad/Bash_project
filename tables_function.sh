@@ -3,6 +3,8 @@
 ## This file hold declarations for functions used for Tables#
 #############################################################
 
+source '../../db_functions.sh'
+
 list_tables() {
     lines=`ls | grep *.txt |wc -l`
     if (( lines == 0 )); then
@@ -22,4 +24,23 @@ drop_table() {
     else
         echo the table does not exist 
     fi
+}
+
+create_table() {
+    read -p 'Enter table name :' table_name
+    if [[ -f $table_name ]]; then
+        echo table name already exists
+    else
+        if [[ -n $table_name ]]; then
+            if validate_heading $table_name ; then
+                clear
+                bash ../../create_table.sh $table_name   
+            else
+                echo please enter a vialid table name        
+            fi
+        else
+            echo please enter a non-empty table name
+        fi
+    fi
+
 }
