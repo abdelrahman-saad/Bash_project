@@ -53,3 +53,13 @@ delete_column() {
         echo please enter a valid column name
     fi
 }
+
+delete_table() {
+    read -p 'Are you sure you want to delete the table (y,n): ' answer
+    lower_answer="${answer,,}"
+    if [[ $lower_answer == 'y' ]]; then
+        rm $1 $1.txt
+        return 0
+    fi
+    return 1
+}

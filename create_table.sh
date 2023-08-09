@@ -10,8 +10,9 @@ column_menu=('Add Column' 'View Columns' 'Delete Column' 'Mark PK' 'Done' 'Exit'
 pk_selected=1
 touch "$1" "$1.txt"
 # chmod a+w "$1.txt"
+exit_loop=true
 
-while true; do
+while $exit_loop; do
 
     select item in "${column_menu[@]}"; do
 
@@ -31,7 +32,13 @@ while true; do
             5)
             ;;
             6)
-            ;;
+                delete_table "$1"
+                if [[ $? -eq 0 ]]; then
+                    exit_loop=false  
+                    echo 'exiting the table creation wizard ... '
+                    break
+                fi
+                ;;
             *)
             echo not a valid option
         esac
