@@ -75,3 +75,12 @@ select_pk() {
         return 1
     fi
 }
+
+save_table() {
+    read -p 'Are you sure you want to save the table (y,n): ' answer
+    lower_answer="${answer,,}"
+    if [[ $lower_answer == 'y' ]]; then
+        return 0
+    fi
+    return 1
+}

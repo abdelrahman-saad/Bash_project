@@ -37,12 +37,18 @@ while $exit_loop; do
                 fi
                 ;;
             5)
-            ;;
+                save_table 
+                if [[ $? -eq 0 ]]; then
+                    exit_loop=false  
+                    echo 'saving table and exiting the table creation wizard ... '
+                    break
+                fi
+                ;;
             6)
                 delete_table "$1"
                 if [[ $? -eq 0 ]]; then
                     exit_loop=false  
-                    echo 'exiting the table creation wizard ... '
+                    echo 'deleting table and exiting the table creation wizard ... '
                     break
                 fi
                 ;;

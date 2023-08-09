@@ -1,0 +1,3 @@
+id : int
+num : int@
+name : string
