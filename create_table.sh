@@ -24,7 +24,8 @@ while true; do
                 list_columns "$1"
                 ;;
             3)
-            ;;
+                delete_column "$1"
+                ;;
             4)
             ;;
             5)

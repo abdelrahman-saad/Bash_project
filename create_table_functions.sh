@@ -38,3 +38,18 @@ list_columns() {
         echo `cat $1`
     fi
 }
+
+delete_column() {
+    read -p 'Enter Column Name you want to delete: ' line
+    if [[ -n $line ]]; then
+        count=$(sed -n "/^$line/p" "$1" | wc -l)
+        if [[ $count -ge 1 ]]; then
+            sed -i "/^$line/d" "$1"
+            echo column deleted successfully
+        else
+            echo please enter a valid column name
+        fi
+    else
+        echo please enter a valid column name
+    fi
+}
