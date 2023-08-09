@@ -1,6 +1,6 @@
 
 source "../../db_functions.sh"
-
+#TODO: check for an exisiting column
 create_table() {
     read -p 'Enter Column Name and datatype (String, Int) seperated by a comma ( , )' line
     column_name=$(echo $line | cut -d ',' -f1)
@@ -77,7 +77,7 @@ select_pk() {
             return 1
         fi
     else
-        echo 'please enter a valid table name'
+        echo 'please enter a valid column name'
         return 1
     fi
 }
