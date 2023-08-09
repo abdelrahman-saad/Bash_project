@@ -7,7 +7,7 @@ source "../../create_table_functions.sh"
 echo "Welcome to table options for table # ${1} #"
 column_menu=('Add Column' 'View Columns' 'Delete Column' 'Mark PK' 'Done' 'Exit' )
 
-pk_selected=1
+pk_selected=false
 touch "$1" "$1.txt"
 # chmod a+w "$1.txt"
 exit_loop=true
@@ -27,8 +27,15 @@ while $exit_loop; do
             3)
                 delete_column "$1"
                 ;;
-            4)
-            ;;
+            4)  if [ $pk_selected = false ]; then
+                    select_pk $1
+                    if [[ $? -eq 0 ]]; then
+                        pk_selected=true
+                    fi
+                else
+                    echo 'you already selected a pk'
+                fi
+                ;;
             5)
             ;;
             6)

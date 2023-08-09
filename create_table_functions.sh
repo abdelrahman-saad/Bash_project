@@ -63,3 +63,15 @@ delete_table() {
     fi
     return 1
 }
+
+select_pk() {
+    read -p 'Which column do you want to mark as a pk: ' chosen_column
+    if grep -q "$chosen_column" <<< "$(cat $1)"; then
+        sed -i "/\b$chosen_column\b/s/$/@/" "$1"
+        echo "Column '$chosen_column' marked as PK."
+        return 0
+    else
+        echo "Column '$chosen_column' not found in the list."
+        return 1
+    fi
+}
