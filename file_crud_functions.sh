@@ -94,7 +94,7 @@ select_from() {
         ' "$1.txt"
 
     elif [[ $answer == 'all' ]]; then
-    echo we went in here 
+
      # Print the header line
     for ((i = 0; i < ${#cols[@]}; i++)); do
         printf "%-20s" "${cols[i]}"
@@ -108,6 +108,33 @@ select_from() {
             print ""
         }
     ' "$1.txt"
+    else
+        echo "Invalid column number."
+    fi
+
+
+}
+
+delete_from() {
+    echo 'select from the column names below you want to have the condition for'
+
+    cols=(${COL_NAMES[@]})
+    length=(${#cols[@]})
+
+    for ((i = 0; i < length; i++)); do
+        echo "$((i + 1)): ${cols[i]}"
+    done  
+    echo 'type all to delete all lines'
+    read -p "column number : " answer
+
+    if ((answer >= 1 && answer <= length)); then
+        selected_column="${cols[answer - 1]}"
+        read -p "Enter the value to check in column '$selected_column': " value
+
+        # Delete rows using sed and store the number of rows deleted
+        sed -i -E "/^([^,]*,){$((answer - 1))}$value,/d" "$1.txt" | echo "Rows Deleted Successfully "
+    elif [[ $answer == 'all' ]]; then
+        truncate -s 0 "$1.txt" | echo "All Records were successfully deleted"
     else
         echo "Invalid column number."
     fi

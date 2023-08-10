@@ -22,7 +22,7 @@ while $crud_bool; do
                 select_from $table_name
             ;;
             3)
-                echo $item
+                delete_from $table_name
             ;;
             4)
                 echo $item
