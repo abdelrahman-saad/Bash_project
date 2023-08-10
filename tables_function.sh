@@ -6,12 +6,14 @@
 source '../../db_functions.sh'
 
 list_tables() {
-    lines=`ls | grep *.txt |wc -l`
+    
+    lines=$(ls *.txt | wc -l)
     if (( lines == 0 )); then
-        echo no tables found
+        echo "No tables found."
     else
-        ls | grep *.txt
-    fi 
+        ls *.txt
+    fi
+
 }
 
 drop_table() {
