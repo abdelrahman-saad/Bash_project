@@ -19,7 +19,7 @@ while $crud_bool; do
                 insert_into $table_name 
             ;;
             2)
-                echo $item
+                select_from $table_name
             ;;
             3)
                 echo $item

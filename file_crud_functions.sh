@@ -61,3 +61,56 @@ insert_into() {
 
 
 }
+
+select_from() {
+    echo 'select from the column names below you want to have the condition for'
+
+    cols=(${COL_NAMES[@]})
+    length=(${#cols[@]})
+
+
+    for ((i = 0; i < length; i++)); do
+        echo "$((i + 1)): ${cols[i]}"
+    done  
+    echo 'type all to print all lines'
+    read -p "column number : " answer
+
+    if ((answer >= 1 && answer <= length)); then
+        selected_column="${cols[answer - 1]}"
+        read -p "Enter the value to check in column '$selected_column': " value
+
+         # Print the header line
+        for ((i = 0; i < ${#cols[@]}; i++)); do
+            printf "%-20s" "${cols[i]}"
+        done
+        echo ""
+
+        # Print the data records
+        awk -F ',' -v col="$answer" -v val="$value" '
+            NR > 1 && $col == val {
+                for (i = 1; i <= NF; i++) printf "%-20s", $i
+                print ""
+            }
+        ' "$1.txt"
+
+    elif [[ $answer == 'all' ]]; then
+    echo we went in here 
+     # Print the header line
+    for ((i = 0; i < ${#cols[@]}; i++)); do
+        printf "%-20s" "${cols[i]}"
+    done
+    echo ""
+
+    # Print all data records
+    awk -F ',' '
+        NR > 1 {
+            for (i = 1; i <= NF; i++) printf "%-20s", $i
+            print ""
+        }
+    ' "$1.txt"
+    else
+        echo "Invalid column number."
+    fi
+
+
+}
