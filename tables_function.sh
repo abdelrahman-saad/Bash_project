@@ -42,3 +42,31 @@ create_table() {
     fi
 
 }
+
+connect_table() {
+    read -p 'Enter table name you want to connect :' table_name
+    # Check if table_name ends with .txt and remove it
+
+    if [[ "$table_name" == *.txt ]]; then
+        table_name="${table_name%.txt}"
+    fi
+
+    if [[ -f $table_name ]]; then
+        if [[ -n $table_name ]]; then
+        #initialize array
+            column_names=()
+            metadata=()
+        # fill arrays with awk expression to capture metadata and column names 
+            readarray -t column_names < <(awk -F ':' '{print $1}' "$table_name")
+            readarray -t metadata < <(awk -F ':' '{print $2}' "$table_name")
+            # echo "Column Names: ${column_names[@]}"
+            # echo "Metadata: ${metadata[@]}"
+
+            #go to file manipulation commands
+        else
+            echo please enter non-empty table name
+        fi
+    else
+        echo table does not exist 
+    fi
+}

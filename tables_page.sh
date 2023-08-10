@@ -2,7 +2,7 @@
 source ../../tables_function.sh
 
 pwd
-table_menu=('Create Table' 'List Table' 'Drop Table' 'Insert into Table' 'Select from Table' 'Delete from Table' 'Update Table' 'Exit')
+table_menu=('Create Table' 'List Table' 'Drop Table' 'Connect Table' 'Exit')
 
 while true; do
     
@@ -19,18 +19,9 @@ while true; do
                 drop_table
             ;;
             4)
-                echo $item
+                connect_table
             ;;
             5)
-                echo $item
-            ;;
-            6)
-                echo $item
-            ;;
-            7)
-                echo $item
-            ;;
-            8)
                 echo exitting database 
                 clear
                 break
