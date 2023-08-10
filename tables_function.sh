@@ -62,7 +62,12 @@ connect_table() {
             # echo "Column Names: ${column_names[@]}"
             # echo "Metadata: ${metadata[@]}"
 
-            #go to file manipulation commands
+            #go to file manipulation commands 
+            # $1 table name
+            # $2 metadata array
+            # $3 column names array
+            clear 
+            bash ../../file_crud.sh $table_name $metadata $column_names 
         else
             echo please enter non-empty table name
         fi
