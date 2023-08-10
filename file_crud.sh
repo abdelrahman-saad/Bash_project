@@ -1,19 +1,22 @@
 
+source '../../file_crud_functions.sh'
+
 echo "You are now connected to table #  $1  #"
 crud_menu=('Insert into Table' 'Select from Table' 'Delete from Table' 'Update Table' 'Exit')
 crud_bool=true
 
 table_name=$1
-column_names=$2
-meta_data=$3
-
+# column_names=(${COL_NAMES})
+# meta_data=(${META_DATA})
+# echo ${column_names[@]}
+# echo ${meta_data[@]}
 while $crud_bool; do
     
     select item in "${crud_menu[@]}"; do
 
         case $REPLY in
             1)
-                echo $item
+                insert_into $table_name 
             ;;
             2)
                 echo $item

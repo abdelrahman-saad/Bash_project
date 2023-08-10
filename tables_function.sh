@@ -66,8 +66,11 @@ connect_table() {
             # $1 table name
             # $2 metadata array
             # $3 column names array
+            # Serialize arrays and variable names, and pass as environment variables
+            export COL_NAMES="${column_names[@]}"
+            export META_DATA="${metadata[@]}"
             clear 
-            bash ../../file_crud.sh $table_name $metadata $column_names 
+            bash ../../file_crud.sh $table_name 
         else
             echo please enter non-empty table name
         fi
