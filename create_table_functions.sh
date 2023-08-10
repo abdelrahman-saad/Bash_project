@@ -1,6 +1,6 @@
 
 source "../../db_functions.sh"
-#TODO: check for an exisiting column
+
 create_table() {
     read -p 'Enter Column Name and datatype (String, Int) seperated by a comma ( , )' line
     column_name=$(echo $line | cut -d ',' -f1)
@@ -9,13 +9,16 @@ create_table() {
     if [[ -n "$column_name" && -n "$datatype" ]]; then
         if validate_heading "$column_name"; then
             if [[ "$lower_datatype" == "string" || "$lower_datatype" == "int" ]]; then
-
-                echo "${column_name} : ${lower_datatype}" >> "$1"
-                if [[ $? -eq 0 ]]; then
-                    echo "Column was added to table successfully"
+                if grep -q "^${column_name}" "$1"; then
+                    echo "Column '$column_name' already exists in the table."
                 else
-                    echo "An issue happened while writing"
-                    echo "$1"
+                    echo "${column_name} : ${lower_datatype}" >> "$1"
+                    if [[ $? -eq 0 ]]; then
+                        echo "Column was added to table successfully"
+                    else
+                        echo "An issue happened while writing"
+                        echo "$1"
+                    fi
                 fi
             else
                 echo issue occured $lower_datatype
