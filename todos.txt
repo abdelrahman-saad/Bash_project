@@ -1,0 +1,5 @@
+to do tasks to validate more
+
+1   do not delete column that contains pk after assigning
+2   dont save the file for columns creation wothout checking for a pk
+3   dont update / delete / select while the value is empty or does not exist
