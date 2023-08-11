@@ -87,7 +87,7 @@ select_from() {
 
         # Print the data records
         awk -F ',' -v col="$answer" -v val="$value" '
-            NR > 1 && $col == val {
+            NR > 0 && $col == val {
                 for (i = 1; i <= NF; i++) printf "%-20s", $i
                 print ""
             }
@@ -103,7 +103,7 @@ select_from() {
 
     # Print all data records
     awk -F ',' '
-        NR > 1 {
+        NR > 0 {
             for (i = 1; i <= NF; i++) printf "%-20s", $i
             print ""
         }
@@ -139,5 +139,28 @@ delete_from() {
         echo "Invalid column number."
     fi
 
+
+}
+
+update_table() {
+
+echo 'select from the column names below you want to have the condition for'
+
+cols=(${COL_NAMES[@]})
+length=(${#cols[@]})
+
+for ((i = 0; i < length; i++)); do
+    echo "$((i + 1)): ${cols[i]}"
+done  
+
+read -p "Enter the number of the column: " answer
+ selected_column="${cols[answer - 1]}"
+read -p "Enter the old value to replace in column $selected_column: " old_value
+read -p "Enter the new value: " new_value
+
+# Update rows using awk in-place and store the number of rows updated
+updated_count=$(sed -i -E "1,\$ s/^(([^,]*,){$((answer - 1))})$old_value,/\1$new_value,/" "$1.txt")
+
+echo "Values Updated Successsfully"
 
 }

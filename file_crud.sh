@@ -25,7 +25,7 @@ while $crud_bool; do
                 delete_from $table_name
             ;;
             4)
-                echo $item
+                update_table $table_name
             ;;
             5)
                 echo exitting table 
