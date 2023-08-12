@@ -74,11 +74,17 @@ select_from() {
     done  
     echo 'type all to print all lines'
     read -p "column number : " answer
-
+    if [[ -z $answer ]]; then
+            echo please enter a non empty column number
+            return 1
+    fi
     if ((answer >= 1 && answer <= length)); then
         selected_column="${cols[answer - 1]}"
         read -p "Enter the value to check in column '$selected_column': " value
-
+        if [[ -z $value ]]; then
+            echo please enter a non empty select value
+            return 1
+        fi
          # Print the header line
         for ((i = 0; i < ${#cols[@]}; i++)); do
             printf "%-20s" "${cols[i]}"
@@ -126,11 +132,17 @@ delete_from() {
     done  
     echo 'type all to delete all lines'
     read -p "column number : " answer
-
+    if [[ -z $answer ]]; then
+        echo please enter a non empty column value
+        return 1
+    fi
     if ((answer >= 1 && answer <= length)); then
         selected_column="${cols[answer - 1]}"
         read -p "Enter the value to check in column '$selected_column': " value
-
+        if [[ -z $value ]]; then
+            echo please enter a non empty drop value
+            return 1
+        fi
         # Delete rows using sed and store the number of rows deleted
         sed -i -E "/^([^,]*,){$((answer - 1))}$value,/d" "$1.txt" | echo "Rows Deleted Successfully "
     elif [[ $answer == 'all' ]]; then
@@ -157,6 +169,11 @@ read -p "Enter the number of the column: " answer
  selected_column="${cols[answer - 1]}"
 read -p "Enter the old value to replace in column $selected_column: " old_value
 read -p "Enter the new value: " new_value
+
+if [[ -z $answer || -z $old_value || -z $new_value ]]; then
+    echo "please insert non empty values"
+    return 1
+fi
 
 # Update rows using awk in-place and store the number of rows updated
 updated_count=$(sed -i -E "1,\$ s/^(([^,]*,){$((answer - 1))})$old_value,/\1$new_value,/" "$1.txt")
