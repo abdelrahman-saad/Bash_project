@@ -47,8 +47,14 @@ delete_column() {
     if [[ -n $line ]]; then
         count=$(sed -n "/^$line/p" "$1" | wc -l)
         if [[ $count -ge 1 ]]; then
-            sed -i "/^$line/d" "$1"
-            echo column deleted successfully
+        var=(`grep "^$line.*@$" "$1" | wc -l`)
+            if [[ var -ge 1 ]]; then
+            echo "cannot delete a pk column"
+                return 1
+            else
+                sed -i "/^$line/d" "$1"
+                echo column deleted successfully
+            fi
         else
             echo please enter a valid column name
         fi
