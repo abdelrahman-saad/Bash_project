@@ -1,3 +1,0 @@
-to do tasks to validate more
-
-1   dont update / delete / select while the value does not exist

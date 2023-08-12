@@ -189,6 +189,14 @@ if ! awk -F, -v col="$answer" -v val="$old_value" '$col == val { found = 1; exit
     return 1      
 fi
 
+#get the index of the primary key from metadata file using sed
+pk_index=$(sed -n '/@/=' "$1")
+
+if  awk -F, -v col="$pk_index" -v val="$new_value" '$col == val { found = 1; exit } END { exit !found }' "$1.txt"; then
+    echo "we cannot have two pk with the same values"
+    return 1
+fi
+
 # Update rows using awk in-place and store the number of rows updated
 updated_count=$(sed -i -E "1,\$ s/^(([^,]*,){$((answer - 1))})$old_value,/\1$new_value,/" "$1.txt")
 
