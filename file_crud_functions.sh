@@ -85,6 +85,12 @@ select_from() {
             echo please enter a non empty select value
             return 1
         fi
+
+        if ! awk -F, -v col="$answer" -v val="$value" '$col == val { found = 1; exit } END { exit !found }' "$1.txt"; then
+             echo "Value does not exist in the specified column."    
+             return 1      
+        fi
+
          # Print the header line
         for ((i = 0; i < ${#cols[@]}; i++)); do
             printf "%-20s" "${cols[i]}"
@@ -143,6 +149,10 @@ delete_from() {
             echo please enter a non empty drop value
             return 1
         fi
+        if ! awk -F, -v col="$answer" -v val="$value" '$col == val { found = 1; exit } END { exit !found }' "$1.txt"; then
+            echo "Value does not exist in the specified column."    
+            return 1      
+        fi
         # Delete rows using sed and store the number of rows deleted
         sed -i -E "/^([^,]*,){$((answer - 1))}$value,/d" "$1.txt" | echo "Rows Deleted Successfully "
     elif [[ $answer == 'all' ]]; then
@@ -173,6 +183,10 @@ read -p "Enter the new value: " new_value
 if [[ -z $answer || -z $old_value || -z $new_value ]]; then
     echo "please insert non empty values"
     return 1
+fi
+if ! awk -F, -v col="$answer" -v val="$old_value" '$col == val { found = 1; exit } END { exit !found }' "$1.txt"; then
+    echo "Old Value does not exist in the specified column."    
+    return 1      
 fi
 
 # Update rows using awk in-place and store the number of rows updated
