@@ -36,13 +36,20 @@ create_DB() {
 
 connect_DB() {
     read -p "Enter Database name you want to connect: " db_connect
-    if [ -d $DB_DIR/$db_connect ]; then
-        cd "$DB_DIR/$db_connect"
+    if [[ -z $db_connect ]]; then
         clear
-        echo connect to Database successfully \# $db_connect \#
-        bash ../../tables_page.sh
+        echo please enter a non empty DB name
+        return 1
     else
-        echo the database does not exist 
+        if [ -d $DB_DIR/$db_connect ]; then
+            cd "$DB_DIR/$db_connect"
+            clear
+            echo connect to Database successfully \# $db_connect \#
+            bash ../../tables_page.sh
+        else
+            echo the database does not exist 
+        fi
+        return 0
     fi
 }
 

@@ -27,8 +27,10 @@ while true; do
                 ;;
             3) 
                 connect_DB
-                cd ../../
-                break
+                if [[ $? -eq 0 ]]; then
+                    cd ../../
+                    break
+                fi
                 ;;
 
             4) 
