@@ -37,7 +37,7 @@ while $exit_loop; do
                 fi
                 ;;
             5)
-                save_table 
+                save_table $pk_selected
                 if [[ $? -eq 0 ]]; then
                     exit_loop=false  
                     echo 'saving table and exiting the table creation wizard ... '

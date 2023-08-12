@@ -92,6 +92,12 @@ select_pk() {
 }
 
 save_table() {
+
+    if ! $1; then
+        echo "Cannot save table columns without selecting a pk"
+        return 1
+    fi
+
     read -p 'Are you sure you want to save the table (y,n): ' answer
     lower_answer="${answer,,}"
     if [[ $lower_answer == 'y' ]]; then

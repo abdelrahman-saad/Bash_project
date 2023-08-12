@@ -1,4 +1,3 @@
 to do tasks to validate more
 
-1   dont save the file for columns creation wothout checking for a pk
-2   dont update / delete / select while the value is empty or does not exist
+1   dont update / delete / select while the value is empty or does not exist
